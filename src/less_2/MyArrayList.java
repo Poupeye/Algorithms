@@ -1,8 +1,6 @@
 package less_2;
 
 
-import java.util.Arrays;
-
 public class MyArrayList<T extends Comparable> {
     private int size = 0;
     private T[] list;
@@ -33,6 +31,13 @@ public class MyArrayList<T extends Comparable> {
         size++;
     }
 
+    public void remove(int index) {
+        for (int i = index; i < size-1; i++) {
+            list[i] = list[i + 1];
+        }
+        size--;
+        list[size] = null;
+    }
 
     public boolean remove(T item) {
         int index = indexOf(item);
@@ -42,14 +47,6 @@ public class MyArrayList<T extends Comparable> {
 
         remove(index);
         return true;
-    }
-
-    private void remove(int index) {
-        for (int i = index; i < size; i++) {
-            list[i] = list[i + 1];
-        }
-        size--;
-        list[size] = null;
     }
 
     public final int indexOf(T item) {
