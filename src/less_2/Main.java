@@ -9,11 +9,21 @@ public class Main {
         MyArrayList<Integer> mal = new MyArrayList<>(5);
         SortedArray<Integer> mal2 = new  SortedArray<>();
 
-        for (int i = 0; i < 5; i++) {
-            mal.add(i+5);
-        }
-        System.out.println(mal);
+//        for (int i = 0; i < 5; i++) {
+//            mal.add(i);
+//        }
+//        System.out.println(mal);
 
+
+        for (int i = 5; i > 0; i--) {
+            mal2.add(i);
+        }
+        System.out.println(mal2);
+
+//        for (int i = 0; i < 5; i++) {
+//            mal2.add(i+9);
+//        }
+//        System.out.println(mal2);
 //        mal.insertSort();
 //        System.out.println(mal);
 //
@@ -23,12 +33,12 @@ public class Main {
 //        mal.bobbleSort();
 
 //        mal.remove(new Integer(99));
-        mal.remove(2);
+//        mal.remove(2);
 //        mal.remove(new Integer(6));
 
 
 
-        System.out.println(mal);
+//        System.out.println(mal);
 
 
     }

@@ -4,10 +4,8 @@ public class SortedArray<T extends Comparable> extends MyArrayList<T> {
     @Override
     public void add(T item) {
         int i = 0;
-        while (i < size() && item.compareTo(get(i)) >= 0) {
-            i++;
-        }
-        super.add(i, item);
+        super.add(item);
+        super.insertSort();
     }
 
     @Override
