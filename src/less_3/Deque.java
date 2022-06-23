@@ -2,79 +2,76 @@ package less_3;
 
 import java.util.EmptyStackException;
 
-public class Deque<T> {
+public class Deque<Item> {
     private int size = 0;
     private int begin = 0;
     private int end = 0;
-    private T[] list;
+    private Item[] arr;
+    private double loadFactor = 0.75;
 
-    public Deque(int capacity) {
-        if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity: " + capacity);
+    public Deque() {this (10);}
+
+    public Deque(int num) {this(num,0.75);}
+    public Deque (int num, double loadFactor){
+        setLoadFactor(loadFactor);
+        if (num >0) {
+            arr = (Item[]) new  Object [num];
+        }else {
+            throw new IllegalArgumentException();
         }
-        list = (T[]) new Object[capacity];
     }
 
-    public void insertRight(T value) {
-        if (isFull()) {
-            throw new StackOverflowError();
-        }
-        list[end] = value;
-        size--;
+    public void addRight(Item value) {
+        size++;
+        arr[end] = value;
         end = nextIndex(end);
     }
 
-    public void insertLeft(T value) {
-        if (isFull()) {
-            throw new StackOverflowError();
-        }
-        list[end] = value;
+    public void addLeft(Item value) {
         size++;
+        begin = lastIndex(begin);
+        arr[begin] = value;
     }
 
-    public T removeRight() {
-        T temp = peekRight();
+    public Item removeRight() {
+        Item value = peekRight();
         size--;
-        list[size] = null;
-        return temp;
+        arr[begin] = null;
+        begin = nextIndex(begin);
+        return value;
     }
 
-    public T removeLeft() {
-        T temp = peekFront();
-        size++;
-        list[begin] = null;
-        begin = nextIndex(begin);
+    public Item removeLeft() {
+        Item temp = peekLeft();
+        size--;
+        end = lastIndex(end);
+        arr[end] = null;
         return temp;
     }
 
     private int nextIndex(int index) {
-        return (index + 1) % list.length;
+        return (index + 1) % arr.length;
     }
 
-    public T peekFront() {
-        if (isEmpty()) {
+    private int lastIndex(int index) {
+        return (arr.length + index - 1) % arr.length;
+    }
+
+    public Item peekLeft() {
+        if (size<=0) {
             throw new EmptyStackException();
         }
-        return list[begin];
+        return arr[lastIndex(end)];
     }
 
-    public T peekRight() {
-        if (isEmpty()) {
+    public Item peekRight() {
+        if (size<=0) {
             throw new EmptyStackException();
         }
-        return list[size - 1];
+        return arr[begin];
     }
 
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public boolean isFull() {
-        return size == list.length;
-    }
-
-    public int size() {
-        return size;
+    public void setLoadFactor(double loadFactor) {
+        this.loadFactor = loadFactor;
     }
 }

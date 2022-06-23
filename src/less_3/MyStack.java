@@ -2,18 +2,18 @@ package less_3;
 
 import java.util.EmptyStackException;
 
-public class MyStack<T> {
+public class MyStack<String> {
     private int size = 0;
-    private T[] list;
+    private String[] list;
 
     public MyStack(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("capacity;" + capacity);
         }
-        list = (T[]) new Object[capacity];
+        list = (String[]) new Object[capacity];
     }
 
-    public void push(T value) {
+    public void push(String value) {
         if (isFull()) {
             reCapasity(list.length + 1);
         }
@@ -21,14 +21,14 @@ public class MyStack<T> {
         size++;
     }
 
-    public T pop() {
-        T temp = peek();
+    public String pop() {
+        String temp = peek();
         size--;
         list[size] = null;
         return temp;
     }
 
-    public T peek() {
+    public String peek() {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
@@ -48,11 +48,16 @@ public class MyStack<T> {
     }
 
     private void reCapasity(int newCapacity) {
-        T[] tempArr = (T[]) new Object[newCapacity];
+        String[] tempArr = (String[]) new Object[newCapacity];
         System.arraycopy(list, 0, tempArr, 0, size);
         list = tempArr;
     }
 
+//    public String reversString(String s) {
+//        StringBuilder sb = new StringBuilder((java.lang.String) s);
+//        System.out.println(sb.reverse());
+//        return s;
+//    }
 }
 
 
