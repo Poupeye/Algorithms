@@ -68,7 +68,6 @@ public class Tree<Key extends Comparable<Key>, Value> {
     }
 
     private Value get(Node node, Key key) {
-        isKeyNotNull(key);
         if (node == null) {
             return null;
         }
@@ -85,7 +84,7 @@ public class Tree<Key extends Comparable<Key>, Value> {
     public final void add(Key key, Value value) {
         isKeyNotNull(key);
         if (value == null) {
-            return;
+            throw new IllegalArgumentException("нул не должен быть");
         }
         root = add(root, key, value);
     }
